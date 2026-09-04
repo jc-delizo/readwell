@@ -1,0 +1,77 @@
+.site-nav.navbar {
+  min-height: 72px;
+  background: rgba(255, 253, 248, 0.94);
+  border-bottom: 1px solid rgba(24, 57, 43, 0.1);
+  backdrop-filter: blur(16px);
+}
+
+.site-nav__logo {
+  display: block;
+  width: 142px;
+  max-height: 34px;
+}
+
+.site-nav .nav-link,
+.site-nav__logout.btn {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin: 0 0.15rem;
+  padding: 0.6rem 0.7rem !important;
+  color: #526158;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-nav .nav-link:hover,
+.site-nav .nav-link.active,
+.site-nav__logout.btn:hover {
+  color: #18392b;
+}
+
+.site-nav .nav-link.active {
+  box-shadow: inset 0 -2px #d96c47;
+}
+
+.site-nav__account.nav-link {
+  margin-left: 0.45rem;
+  padding-right: 1rem !important;
+  padding-left: 1rem !important;
+  color: white !important;
+  background: #18392b;
+  border-radius: 0.4rem;
+}
+
+.site-nav__account.nav-link:hover {
+  background: #285a45;
+}
+
+.site-nav__logout.btn {
+  color: #9b3028;
+  border: 0;
+}
+
+@media (max-width: 991px) {
+  .site-nav .navbar-collapse {
+    padding: 1rem 0 0.7rem;
+  }
+
+  .site-nav .nav-link,
+  .site-nav__logout.btn {
+    width: 100%;
+    margin: 0;
+    padding: 0.75rem 0 !important;
+  }
+
+  .site-nav .nav-link.active {
+    box-shadow: none;
+  }
+
+  .site-nav__account.nav-link {
+    width: max-content;
+    margin-top: 0.5rem;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+  }
+}

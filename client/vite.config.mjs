@@ -1,0 +1,23 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173,
+    proxy: {
+      '/booknook': {
+        target: 'http://localhost:5020',
+        changeOrigin: true,
+      },
+      '/api': {
+        target: 'http://localhost:5020',
+        changeOrigin: true,
+      },
+    },
+  },
+  test: {
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.js',
+  },
+});

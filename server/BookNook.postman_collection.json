@@ -1,0 +1,1014 @@
+{
+  "info": {
+    "_postman_id": "dbc124e3-b074-4255-8675-08f78cd4f30c",
+    "name": "BOOKNOOK",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "REGISTER | LOG IN",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"JC Delizo\",\r\n    \"email\": \"reader@example.com\",\r\n    \"mobileNo\": \"09171234567\",\r\n    \"password\": \"change-me-123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5020/booknook/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5020",
+              "path": [
+                "booknook",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Log In",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"reader@example.com\",\r\n    \"password\": \"change-me-123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5020/booknook/users/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5020",
+              "path": [
+                "booknook",
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "ADMIN FUNCTIONS",
+      "item": [
+        {
+          "name": "Book Tasks",
+          "item": [
+            {
+              "name": "Get All Books",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:5020/booknook/books",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "books"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get a Specific Book",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/books/activebooks",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "books",
+                    "activebooks"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Upload a Book",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\"name\": \"To Kill a Mockingbird\",\r\n\"description\": \"A classic novel that explores themes of racial injustice, prejudice, and the loss of innocence in the American South.\",\r\n\"author\": \"Harper Lee\",\r\n\"genre\": \"Literary Fiction\",\r\n\"price\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/books",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "books"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update a Book",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"The Catcher in the Rye\",\r\n    \"description\": \"A coming-of-age novel that has become a classic of modern literature.\",\r\n    \"author\": \"J.D. Salinger\",\r\n    \"genre\": \"Dystopian Fiction\",\r\n    \"price\": 5\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/books/63d1fb2b67f1c53deb8a45aa",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "books",
+                    "63d1fb2b67f1c53deb8a45aa"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete a Book",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:5020/booknook/books/63d1fb2b67f1c53deb8a45aa",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "books",
+                    "63d1fb2b67f1c53deb8a45aa"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Archive a Book",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"The Catcher in the Rye\",\r\n    \"description\": \"A coming-of-age novel that has become a classic of modern literature.\",\r\n    \"author\": \"J.D. Salinger\",\r\n    \"genre\": \"Dystopian Fiction\",\r\n    \"price\": 5\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/books/63d1fb2b67f1c53deb8a45aa",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "books",
+                    "63d1fb2b67f1c53deb8a45aa"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Activate a Book",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"The Catcher in the Rye\",\r\n    \"description\": \"A coming-of-age novel that has become a classic of modern literature.\",\r\n    \"author\": \"J.D. Salinger\",\r\n    \"genre\": \"Dystopian Fiction\",\r\n    \"price\": 5\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/books/63d1fb2b67f1c53deb8a45aa",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "books",
+                    "63d1fb2b67f1c53deb8a45aa"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Archived Books",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/books/inactivebooks",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "books",
+                    "inactivebooks"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Active Books",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/books/activebooks",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "books",
+                    "activebooks"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "User Tasks",
+          "item": [
+            {
+              "name": "Get Any User Details",
+              "request": {
+                "method": "GET",
+                "header": []
+              },
+              "response": []
+            },
+            {
+              "name": "Promote a User to Admin",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:5020/booknook/users/makeadmin/63d2e0c550812dc6cd393e11",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "users",
+                    "makeadmin",
+                    "63d2e0c550812dc6cd393e11"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Cart Tasks",
+          "item": [
+            {
+              "name": "Add to Cart",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\"book\": \"63d25ecc1658a52bcf3eaa56\",\r\n\"quantity\": 3\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/cart/add-to-cart",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "cart",
+                    "add-to-cart"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Book Quantities",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"book\": \"63d25ecc1658a52bcf3eaa56\",\r\n  \"quantity\": 5\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/cart/update-quantities",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "cart",
+                    "update-quantities"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Remove a Book from the Cart",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"book\": \"63d25ecc1658a52bcf3eaa56\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/cart/remove-book",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "cart",
+                    "remove-book"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "View Cart",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:5020/booknook/cart/view-cart",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "cart",
+                    "view-cart"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Check Out",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"shippingAddress\": \"1234 Example St, Anytown USA 12345\",\r\n  \"modeOfPayment\": \"credit card\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/order/checkout",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "order",
+                    "checkout"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Retrieve a User's Orders",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"shippingAddress\": \"1234 Example St, Anytown USA 12345\",\r\n  \"modeOfPayment\": \"credit card\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/order/retrieve-a-user-order/63d2e0c550812dc6cd393e11",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "order",
+                    "retrieve-a-user-order",
+                    "63d2e0c550812dc6cd393e11"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Retrieve all Orders of all Users",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"shippingAddress\": \"1234 Example St, Anytown USA 12345\",\r\n  \"modeOfPayment\": \"credit card\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5020/booknook/order/retrieve-a-user-order/63d2e0c550812dc6cd393e11",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5020",
+                  "path": [
+                    "booknook",
+                    "order",
+                    "retrieve-a-user-order",
+                    "63d2e0c550812dc6cd393e11"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "My Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5020/booknook/users/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5020",
+              "path": [
+                "booknook",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "USER FUNCTIONS",
+      "item": [
+        {
+          "name": "My Profile",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Active Books",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5020/booknook/books/activebooks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5020",
+              "path": [
+                "booknook",
+                "books",
+                "activebooks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get a Specific Book",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5020/booknook/books/activebooks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5020",
+              "path": [
+                "booknook",
+                "books",
+                "activebooks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add to Cart",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\"book\": \"63d25ecc1658a52bcf3eaa56\",\r\n\"quantity\": 3\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5020/booknook/cart/add-to-cart",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5020",
+              "path": [
+                "booknook",
+                "cart",
+                "add-to-cart"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Book Quantities",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"book\": \"63d25ecc1658a52bcf3eaa56\",\r\n  \"quantity\": 5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5020/booknook/cart/update-quantities",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5020",
+              "path": [
+                "booknook",
+                "cart",
+                "update-quantities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove a Book from the Cart",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"book\": \"63d25ecc1658a52bcf3eaa56\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5020/booknook/cart/remove-book",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5020",
+              "path": [
+                "booknook",
+                "cart",
+                "remove-book"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "View Cart",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5020/booknook/cart/view-cart",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5020",
+              "path": [
+                "booknook",
+                "cart",
+                "view-cart"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check Out",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"shippingAddress\": \"1234 Example St, Anytown USA 12345\",\r\n  \"modeOfPayment\": \"credit card\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5020/booknook/order/checkout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5020",
+              "path": [
+                "booknook",
+                "order",
+                "checkout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5020",
+      "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
