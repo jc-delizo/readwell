@@ -72,20 +72,20 @@ export default function Register() {
           <p>Create an account to save a cart and place orders.</p>
           {error && <Alert variant="danger">{error}</Alert>}
 
-          <Form onSubmit={register}>
-            <Form.Group className="mb-3" controlId="register-name">
-              <Form.Label>Full name</Form.Label>
-              <Form.Control name="name" value={form.name} onChange={update} autoComplete="name" minLength={2} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="register-mobile">
-              <Form.Label>Mobile number</Form.Label>
-              <Form.Control name="mobileNo" type="tel" value={form.mobileNo} onChange={update} autoComplete="tel" minLength={7} maxLength={20} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="register-email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control name="email" type="email" value={form.email} onChange={update} autoComplete="email" required />
-            </Form.Group>
-            <div className="auth-card__row">
+          <Form className="auth-card__register-form" onSubmit={register}>
+            <div className="auth-card__register-grid">
+              <Form.Group controlId="register-name">
+                <Form.Label>Full name</Form.Label>
+                <Form.Control name="name" value={form.name} onChange={update} autoComplete="name" minLength={2} required />
+              </Form.Group>
+              <Form.Group controlId="register-mobile">
+                <Form.Label>Mobile number</Form.Label>
+                <Form.Control name="mobileNo" type="tel" value={form.mobileNo} onChange={update} autoComplete="tel" minLength={7} maxLength={20} required />
+              </Form.Group>
+              <Form.Group className="auth-card__register-email" controlId="register-email">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control name="email" type="email" value={form.email} onChange={update} autoComplete="email" required />
+              </Form.Group>
               <Form.Group controlId="register-password">
                 <Form.Label>Password</Form.Label>
                 <Form.Control name="password" type="password" value={form.password} onChange={update} autoComplete="new-password" minLength={8} maxLength={72} required />
@@ -95,7 +95,7 @@ export default function Register() {
                 <Form.Control name="confirmPassword" type="password" value={form.confirmPassword} onChange={update} autoComplete="new-password" required />
               </Form.Group>
             </div>
-            <Button type="submit" className="button-primary w-100 mt-4" disabled={isSubmitting}>
+            <Button type="submit" className="button-primary auth-card__submit w-100" disabled={isSubmitting}>
               {isSubmitting ? 'Creating account…' : 'Create account'}
             </Button>
           </Form>
