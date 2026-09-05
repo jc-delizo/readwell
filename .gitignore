@@ -5,6 +5,8 @@ coverage/
 .env
 .env.*
 !.env.example
+/CREDENTIALS.md
+/.secrets/
 
 *.log
 .DS_Store
