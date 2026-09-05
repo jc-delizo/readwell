@@ -10,6 +10,7 @@ provides the database.
 - Runtime: Docker
 - Region: Singapore
 - Health check: `/api/health`
+- Service URL: `https://readwell-nodj.onrender.com`
 - Blueprint: [`render.yaml`](./render.yaml)
 
 ## Runtime configuration
@@ -29,9 +30,15 @@ BOOTSTRAP_ADMIN_EMAIL=admin@readwell.demo
 Render supplies `PORT`, so it should not be hardcoded. Because Express serves
 the built React client from the same origin, `CLIENT_ORIGINS` is not required.
 
+MongoDB Atlas must allow the outbound IP ranges used by the Render service:
+
+```text
+74.220.52.0/24
+74.220.60.0/24
+```
+
 ## Credential handling
 
 - Keep Render API keys temporary and revoke them after automation completes.
 - Rotate database passwords that have been shared outside a secret manager.
-- Use `CREDENTIALS.md` only as an ignored local scratch file if absolutely
-  necessary; it is intentionally excluded by `.gitignore`.
+- Keep only the non-secret credential inventory in [`CREDENTIALS.md`](./CREDENTIALS.md).
