@@ -507,6 +507,38 @@ textarea {
   font-size: 0.88rem;
 }
 
+.catalog-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.catalog-pagination .pagination {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.catalog-pagination .page-link {
+  min-width: 2.4rem;
+  color: var(--forest);
+  background: white;
+  border-color: var(--line);
+  border-radius: 0.35rem;
+  text-align: center;
+}
+
+.catalog-pagination .active > .page-link {
+  color: white;
+  background: var(--forest);
+  border-color: var(--forest);
+}
+
+.catalog-pagination .disabled > .page-link {
+  color: var(--muted);
+  background: var(--cream);
+}
+
 .loading-state {
   display: flex;
   gap: 0.8rem;

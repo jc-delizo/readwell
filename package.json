@@ -18,7 +18,8 @@
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint . --max-warnings=0",
     "check": "npm run lint && npm test && npm run build",
-    "audit:production": "npm audit --omit=dev --workspaces"
+    "audit:production": "npm audit --omit=dev --workspaces",
+    "seed:catalog": "node scripts/seed-open-library.mjs"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

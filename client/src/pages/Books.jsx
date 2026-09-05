@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Alert, Container, Form } from 'react-bootstrap';
+import { Alert, Container, Form, Pagination } from 'react-bootstrap';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { useSearchParams } from 'react-router-dom';
 import BookCard from '../components/BookCard';
 import Loading from '../components/Loading';
 import { api } from '../lib/api';
+
+const PAGE_SIZE = 24;
 
 export default function Books() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,10 +16,11 @@ export default function Books() {
   const [search, setSearch] = useState('');
   const [genre, setGenre] = useState(searchParams.get('genre') || '');
   const [sort, setSort] = useState('newest');
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const controller = new AbortController();
-    api('/booknook/books/activebooks?limit=200', { signal: controller.signal })
+    api('/booknook/books/activebooks?limit=500', { signal: controller.signal })
       .then(setBooks)
       .catch((requestError) => {
         if (requestError.name !== 'AbortError') setError(requestError.message);
@@ -51,8 +54,14 @@ export default function Books() {
     });
   }, [books, genre, search, sort]);
 
+  const totalPages = Math.max(1, Math.ceil(visibleBooks.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pageStart = (currentPage - 1) * PAGE_SIZE;
+  const pageBooks = visibleBooks.slice(pageStart, pageStart + PAGE_SIZE);
+
   const selectGenre = (selected) => {
     setGenre(selected);
+    setPage(1);
     const next = new URLSearchParams(searchParams);
     if (selected) next.set('genre', selected);
     else next.delete('genre');
@@ -76,10 +85,20 @@ export default function Books() {
               type="search"
               placeholder="Search by title, author, or keyword"
               value={search}
-              onChange={(event) => setSearch(event.target.value)}
+              onChange={(event) => {
+                setSearch(event.target.value);
+                setPage(1);
+              }}
             />
           </label>
-          <Form.Select value={sort} onChange={(event) => setSort(event.target.value)} aria-label="Sort books">
+          <Form.Select
+            value={sort}
+            onChange={(event) => {
+              setSort(event.target.value);
+              setPage(1);
+            }}
+            aria-label="Sort books"
+          >
             <option value="newest">Newest first</option>
             <option value="title">Title A–Z</option>
             <option value="price-low">Price: low to high</option>
@@ -100,11 +119,40 @@ export default function Books() {
         {error && <Alert variant="danger">Could not load books: {error}</Alert>}
         {!isLoading && !error && (
           <>
-            <p className="result-count">Showing {visibleBooks.length} {visibleBooks.length === 1 ? 'book' : 'books'}</p>
+            <p className="result-count">
+              {visibleBooks.length
+                ? `Showing ${pageStart + 1}–${Math.min(pageStart + PAGE_SIZE, visibleBooks.length)} of ${visibleBooks.length} books`
+                : 'Showing 0 books'}
+            </p>
             {visibleBooks.length ? (
-              <div className="book-grid">
-                {visibleBooks.map((book) => <BookCard key={book._id} book={book} />)}
-              </div>
+              <>
+                <div className="book-grid">
+                  {pageBooks.map((book) => <BookCard key={book._id} book={book} />)}
+                </div>
+                {totalPages > 1 && (
+                  <nav className="catalog-pagination" aria-label="Catalog pages">
+                    <Pagination>
+                      <Pagination.Prev
+                        disabled={currentPage === 1}
+                        onClick={() => setPage((value) => Math.max(1, value - 1))}
+                      />
+                      {Array.from({ length: totalPages }, (_, index) => index + 1).map((number) => (
+                        <Pagination.Item
+                          key={number}
+                          active={number === currentPage}
+                          onClick={() => setPage(number)}
+                        >
+                          {number}
+                        </Pagination.Item>
+                      ))}
+                      <Pagination.Next
+                        disabled={currentPage === totalPages}
+                        onClick={() => setPage((value) => Math.min(totalPages, value + 1))}
+                      />
+                    </Pagination>
+                  </nav>
+                )}
+              </>
             ) : (
               <div className="empty-state">
                 <FaMagnifyingGlass aria-hidden="true" />

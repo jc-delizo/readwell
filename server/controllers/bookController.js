@@ -74,7 +74,7 @@ const getActiveBooks = async (req, res) => {
   const filter = { isActive: true };
   const query = typeof req.query.q === 'string' ? req.query.q.trim() : '';
   const genre = typeof req.query.genre === 'string' ? req.query.genre.trim() : '';
-  const limit = Math.min(Math.max(Number.parseInt(req.query.limit, 10) || 100, 1), 200);
+  const limit = Math.min(Math.max(Number.parseInt(req.query.limit, 10) || 100, 1), 500);
 
   if (query) {
     const pattern = new RegExp(escapeRegExp(query.slice(0, 100)), 'i');
