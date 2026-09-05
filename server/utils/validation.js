@@ -41,6 +41,23 @@ const positiveNumber = (value, field, { allowZero = false } = {}) => {
   return Math.round(normalized * 100) / 100;
 };
 
+const boundedNumber = (value, field, { min, max, precision = 2 }) => {
+  const normalized = Number(value);
+  if (!Number.isFinite(normalized) || normalized < min || normalized > max) {
+    throw httpError(400, `${field} must be a number from ${min} to ${max}.`);
+  }
+  const factor = 10 ** precision;
+  return Math.round(normalized * factor) / factor;
+};
+
+const boundedInteger = (value, field, { min, max }) => {
+  const normalized = Number(value);
+  if (!Number.isInteger(normalized) || normalized < min || normalized > max) {
+    throw httpError(400, `${field} must be an integer from ${min} to ${max}.`);
+  }
+  return normalized;
+};
+
 const quantity = (value, { allowZero = false } = {}) => {
   const normalized = Number(value);
   const minimum = allowZero ? 0 : 1;
@@ -53,4 +70,13 @@ const quantity = (value, { allowZero = false } = {}) => {
 const escapeRegExp = (value) =>
   value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-module.exports = { email, escapeRegExp, mobile, positiveNumber, quantity, text };
+module.exports = {
+  boundedInteger,
+  boundedNumber,
+  email,
+  escapeRegExp,
+  mobile,
+  positiveNumber,
+  quantity,
+  text,
+};

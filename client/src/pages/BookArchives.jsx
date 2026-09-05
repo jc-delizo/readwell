@@ -6,6 +6,7 @@ import AddBook from '../components/AddBook';
 import AdminInfo from '../components/AdminInfo';
 import Loading from '../components/Loading';
 import UpdateBook from '../components/UpdateBook';
+import Rating from '../components/Rating';
 import { api } from '../lib/api';
 import { formatCurrency } from '../lib/format';
 
@@ -119,7 +120,7 @@ export default function BookArchives() {
               <img src={book.image} alt={`Cover of ${book.name}`} />
               <div className="catalog-admin-card__content">
                 <Badge bg={book.isActive ? 'success' : 'secondary'}>{book.isActive ? 'Active' : 'Archived'}</Badge>
-                <h2>{book.name}</h2><p>{book.author}</p><strong>{formatCurrency(book.price)}</strong>
+                <h2>{book.name}</h2><p>{book.author}</p><Rating book={book} /><strong>{formatCurrency(book.price)}</strong>
               </div>
               <div className="catalog-admin-card__actions">
                 <Button variant="outline-dark" onClick={() => setSelectedBook(book)}><FaPen /> Edit</Button>

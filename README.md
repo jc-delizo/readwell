@@ -54,6 +54,7 @@ registering that address. Remove or keep the value private after bootstrap.
 | `npm run check` | Run lint, tests, and a production build |
 | `npm run audit:production` | Audit production dependencies |
 | `npm run seed:catalog` | Add an evenly divided Open Library demo catalog |
+| `npm run seed:ratings` | Deterministically populate demo ratings and rating counts |
 
 The catalog seeder requires an administrator account and is idempotent for each
 genre target. For example:
@@ -68,6 +69,17 @@ npm run seed:catalog
 
 Imported book metadata and cover images are provided by
 [Open Library](https://openlibrary.org/developers/api).
+
+The rating backfill uses an administrator account and can guard against updating
+the wrong catalog with `EXPECTED_BOOK_COUNT`:
+
+```bash
+APP_URL=https://your-app.example \
+ADMIN_EMAIL=admin@example.com \
+ADMIN_PASSWORD='your-admin-password' \
+EXPECTED_BOOK_COUNT=308 \
+npm run seed:ratings
+```
 
 ## Production
 

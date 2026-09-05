@@ -1,3 +1,5 @@
+import { demoEngagement } from './lib/demo-rating.mjs';
+
 const appUrl = (process.env.APP_URL || 'http://localhost:5020').replace(/\/$/, '');
 const adminEmail = process.env.ADMIN_EMAIL || 'admin@readwell.demo';
 const adminPassword = process.env.ADMIN_PASSWORD;
@@ -104,14 +106,15 @@ const collectCandidates = async ({ name, subject }, amount) => {
       const publication = Number.isInteger(work.first_publish_year)
         ? `, first published in ${work.first_publish_year}`
         : '';
-      candidates.push({
+      const candidate = {
         name: title,
         author,
         genre: name,
         price: stablePrice(name, title),
         image: `https://covers.openlibrary.org/b/id/${work.cover_i}-L.jpg`,
         description: `${title} is a ${name.toLocaleLowerCase()} selection curated for the ${marker}${publication}.`,
-      });
+      };
+      candidates.push({ ...candidate, ...demoEngagement(candidate) });
       if (candidates.length === amount) break;
     }
   }

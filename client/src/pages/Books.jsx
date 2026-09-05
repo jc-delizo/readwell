@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import BookCard from '../components/BookCard';
 import Loading from '../components/Loading';
 import { api } from '../lib/api';
+import { bookRating, compareByPopularity } from '../lib/catalog';
 
 const PAGE_SIZE = 24;
 
@@ -15,7 +16,7 @@ export default function Books() {
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
   const [genre, setGenre] = useState(searchParams.get('genre') || '');
-  const [sort, setSort] = useState('newest');
+  const [sort, setSort] = useState('popular');
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -47,6 +48,8 @@ export default function Books() {
     });
 
     return filtered.toSorted((a, b) => {
+      if (sort === 'popular') return compareByPopularity(a, b);
+      if (sort === 'rating') return bookRating(b) - bookRating(a) || compareByPopularity(a, b);
       if (sort === 'title') return a.name.localeCompare(b.name);
       if (sort === 'price-low') return a.price - b.price;
       if (sort === 'price-high') return b.price - a.price;
@@ -99,6 +102,8 @@ export default function Books() {
             }}
             aria-label="Sort books"
           >
+            <option value="popular">Most Popular</option>
+            <option value="rating">Highest Rated</option>
             <option value="newest">Newest first</option>
             <option value="title">Title A–Z</option>
             <option value="price-low">Price: low to high</option>

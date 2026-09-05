@@ -14,6 +14,8 @@ const books = Array.from({ length: 25 }, (_, index) => ({
   description: 'A book used to verify catalog pagination.',
   image: 'https://example.com/cover.jpg',
   price: 499,
+  rating: 4.5,
+  reviewCount: 1000 - index,
   createdOn: new Date(2026, 0, index + 1).toISOString(),
 }));
 
@@ -28,11 +30,13 @@ describe('Books', () => {
       '/booknook/books/activebooks?limit=500',
       expect.objectContaining({ signal: expect.any(AbortSignal) }),
     );
+    expect(screen.getByRole('combobox', { name: 'Sort books' })).toHaveValue('popular');
+    expect(screen.getByText('Catalog Book 1')).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('2', { selector: '.page-link' }));
 
     expect(screen.getByText('Showing 25–25 of 25 books')).toBeInTheDocument();
-    expect(screen.getByText('Catalog Book 1')).toBeInTheDocument();
-    expect(screen.queryByText('Catalog Book 25')).not.toBeInTheDocument();
+    expect(screen.getByText('Catalog Book 25')).toBeInTheDocument();
+    expect(screen.queryByText('Catalog Book 1')).not.toBeInTheDocument();
   });
 });

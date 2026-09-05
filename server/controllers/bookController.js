@@ -1,6 +1,8 @@
 const Book = require('../models/bookModel');
 const { httpError } = require('../utils/httpError');
 const {
+  boundedInteger,
+  boundedNumber,
   escapeRegExp,
   positiveNumber,
   text,
@@ -16,9 +18,20 @@ const parseBook = (body, { partial = false } = {}) => {
     price: () => positiveNumber(body.price, 'Price'),
     image: () => text(body.image, 'Image URL', { max: 2_000 }),
   };
+  const optionalDefinitions = {
+    rating: () => boundedNumber(body.rating, 'Rating', { min: 1, max: 5, precision: 1 }),
+    reviewCount: () => boundedInteger(body.reviewCount, 'Rating count', {
+      min: 0,
+      max: 1_000_000,
+    }),
+  };
 
   for (const [field, parse] of Object.entries(definitions)) {
     if (!partial || body[field] !== undefined) fields[field] = parse();
+  }
+
+  for (const [field, parse] of Object.entries(optionalDefinitions)) {
+    if (body[field] !== undefined) fields[field] = parse();
   }
 
   if (partial && Object.keys(fields).length === 0) {

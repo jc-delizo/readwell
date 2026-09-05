@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
 import BookCard from '../components/BookCard';
 import Loading from '../components/Loading';
+import Rating from '../components/Rating';
 import { api } from '../lib/api';
 import { formatCurrency } from '../lib/format';
 
@@ -25,7 +26,7 @@ export default function BookPage() {
 
     Promise.all([
       api(`/booknook/books/specificbook/${id}`, { signal: controller.signal }),
-      api('/booknook/books/activebooks?limit=200', { signal: controller.signal }),
+      api('/booknook/books/activebooks?limit=500', { signal: controller.signal }),
     ])
       .then(([selectedBook, allBooks]) => {
         setBook(selectedBook);
@@ -99,6 +100,7 @@ export default function BookPage() {
             <Badge className="book-detail__genre">{book.genre}</Badge>
             <h1>{book.name}</h1>
             <p className="book-detail__author">by {book.author}</p>
+            <Rating book={book} large />
             <p className="book-detail__description">{book.description}</p>
             <div className="book-detail__purchase">
               <strong>{formatCurrency(book.price)}</strong>

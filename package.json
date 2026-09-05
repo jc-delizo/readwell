@@ -19,7 +19,8 @@
     "lint": "eslint . --max-warnings=0",
     "check": "npm run lint && npm test && npm run build",
     "audit:production": "npm audit --omit=dev --workspaces",
-    "seed:catalog": "node scripts/seed-open-library.mjs"
+    "seed:catalog": "node scripts/seed-open-library.mjs",
+    "seed:ratings": "node scripts/backfill-ratings.mjs"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

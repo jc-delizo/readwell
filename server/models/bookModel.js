@@ -37,6 +37,22 @@ const bookSchema = new mongoose.Schema(
       trim: true,
       maxlength: 2_000,
     },
+    rating: {
+      type: Number,
+      default: 4,
+      min: [1, 'Rating must be at least 1.'],
+      max: [5, 'Rating cannot exceed 5.'],
+    },
+    reviewCount: {
+      type: Number,
+      default: 0,
+      min: [0, 'Rating count cannot be negative.'],
+      max: [1_000_000, 'Rating count cannot exceed 1,000,000.'],
+      validate: {
+        validator: Number.isInteger,
+        message: 'Rating count must be a whole number.',
+      },
+    },
     isActive: {
       type: Boolean,
       default: true,
@@ -50,5 +66,6 @@ const bookSchema = new mongoose.Schema(
 );
 
 bookSchema.index({ isActive: 1, createdOn: -1 });
+bookSchema.index({ isActive: 1, rating: -1, reviewCount: -1 });
 
 module.exports = mongoose.model('Book', bookSchema);

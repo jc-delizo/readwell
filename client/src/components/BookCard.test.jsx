@@ -11,6 +11,8 @@ const book = {
   description: 'A thoughtful story about finding a place to belong.',
   image: 'https://example.com/cover.jpg',
   price: 499,
+  rating: 4.7,
+  reviewCount: 1284,
 };
 
 describe('BookCard', () => {
@@ -23,6 +25,7 @@ describe('BookCard', () => {
     );
     expect(screen.getByText('by A. Reader')).toBeInTheDocument();
     expect(screen.getByText(/₱499\.00/)).toBeInTheDocument();
+    expect(screen.getByLabelText('4.7 out of 5 stars from 1,284 ratings')).toBeInTheDocument();
     expect(screen.getByRole('img')).toHaveAccessibleName('Cover of The Quiet Library');
   });
 });

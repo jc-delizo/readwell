@@ -1,6 +1,7 @@
 import { Badge, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../lib/format';
+import Rating from './Rating';
 
 export default function BookCard({ book }) {
   return (
@@ -12,6 +13,7 @@ export default function BookCard({ book }) {
       <Card.Body className="book-card__body">
         <Card.Title className="book-card__title">{book.name}</Card.Title>
         <p className="book-card__author">by {book.author}</p>
+        <Rating book={book} />
         <Card.Text className="book-card__description">{book.description}</Card.Text>
         <div className="book-card__footer">
           <span className="book-card__price">{formatCurrency(book.price)}</span>
