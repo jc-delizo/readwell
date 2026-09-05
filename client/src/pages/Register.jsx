@@ -64,7 +64,9 @@ export default function Register() {
       </div>
       <div className="auth-page__panel">
         <div className="auth-card">
-          <Link to="/" aria-label="ReadWell home"><img src={readwell} alt="ReadWell" /></Link>
+          <Link to="/" className="auth-card__brand" aria-label="ReadWell home">
+            <img src={readwell} alt="ReadWell" />
+          </Link>
           <span className="eyebrow">Join the community</span>
           <h1>Make room for your next favorite.</h1>
           <p>Create an account to save a cart and place orders.</p>

@@ -764,9 +764,19 @@ textarea {
   width: min(100%, 500px);
 }
 
-.auth-card img {
+.auth-card__brand {
+  display: block;
   width: 150px;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+
+.auth-card__brand img {
+  display: block;
+  width: 100%;
+}
+
+.auth-card > .eyebrow {
+  display: block;
 }
 
 .auth-card h1 {
@@ -1321,7 +1331,7 @@ textarea {
   .book-detail__cover { padding: 0.7rem; }
   .book-detail__purchase { align-items: stretch; flex-direction: column; }
   .auth-page__panel { padding: 2.5rem 1rem; }
-  .auth-card img { margin-bottom: 2rem; }
+  .auth-card__brand { margin-bottom: 1.75rem; }
   .auth-card__row,
   .form-grid { grid-template-columns: 1fr; }
   .form-grid__full { grid-column: auto; }

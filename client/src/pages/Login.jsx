@@ -45,7 +45,9 @@ export default function Login() {
       </div>
       <div className="auth-page__panel">
         <div className="auth-card">
-          <Link to="/" aria-label="ReadWell home"><img src={readwell} alt="ReadWell" /></Link>
+          <Link to="/" className="auth-card__brand" aria-label="ReadWell home">
+            <img src={readwell} alt="ReadWell" />
+          </Link>
           <span className="eyebrow">Welcome back</span>
           <h1>Return to your reading nook.</h1>
           <p>Sign in to see your cart and track your orders.</p>
